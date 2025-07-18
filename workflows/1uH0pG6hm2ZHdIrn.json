@@ -1,0 +1,222 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Loop Through Each Workflow": {
+      "main": [
+        [],
+        [
+          {
+            "node": "3. IF not this workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. IF not this workflow": {
+      "main": [
+        [],
+        [
+          {
+            "node": "4. DELETE Workflow (DISABLED)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4. DELETE Workflow (DISABLED)": {
+      "main": [
+        [
+          {
+            "node": "2. Loop Through Each Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "2. Loop Through Each Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T14:51:45.792Z",
+  "id": "1uH0pG6hm2ZHdIrn",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "9. Del_WF",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "bdaaa2ce-56f5-457b-8a75-0edb24bbb856",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7ca0c489-2bd8-4902-88fe-d3b85d779579",
+      "name": "2. Loop Through Each Workflow",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        0,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "27b72390-e41c-4390-af96-a83d35ddb40e",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "={{ $workflow.id }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEqual",
+                "name": "filter.operator.notEqual"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3575206c-979d-4b5f-88c0-c6b2a5f3bd60",
+      "name": "3. IF not this workflow",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        300
+      ],
+      "notes": "Đảm bảo không tự xóa chính nó!"
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://n8n.trhquan.site/api/v1/workflows/{{ $json.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "9aeed505-4f8a-46d8-b956-453e0ef1ef4f",
+      "name": "4. DELETE Workflow (DISABLED)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        380
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Q08YrR2jwP0iTCDQ",
+          "name": "X-N8N-API-KEY"
+        }
+      },
+      "notes": "**QUAN TRỌNG**\nNode này bị tắt theo mặc định để đảm bảo an toàn.\n\nHãy chạy workflow đến node IF, kiểm tra output để chắc chắn bạn muốn xóa những workflow đó. \n\nSau khi chắc chắn, hãy bật (enable) node này và chạy lại."
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "id": "707cfcbc-fcbe-4497-85e5-a398d8607f8b",
+      "name": "n8n - get all workflows",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        -220,
+        0
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "21KT3H17dCqeNd8H",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n\n  {\n    \"createdAt\": \"2025-07-02T01:03:19.312Z\",\n    \"updatedAt\": \"2025-07-02T15:49:26.000Z\",\n    \"id\": \"B7EueG4kRjTOK8yz\",\n    \"name\": \"Post Ins\",\n    \"active\": false,\n    \"isArchived\": true,\n    \"nodes\": [\n      {\n        \"parameters\": {\n          \"authentication\": \"serviceAccount\",\n          \"documentId\": {\n            \"__rl\": true,\n            \"value\": \"1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI\",\n            \"mode\": \"list\",\n            \"cachedResultName\": \"Tiệm thêu nhà Hy\",\n            \"cachedResultUrl\": \"https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk\"\n          },\n          \"sheetName\": {\n            \"__rl\": true,\n            \"value\": 1374572215,\n            \"mode\": \"list\",\n            \"cachedResultName\": \"Bài viết\",\n            \"cachedResultUrl\": \"https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1374572215\"\n          },\n          \"filtersUI\": {\n            \"values\": [\n              {\n                \"lookupColumn\": \"Ngày\",\n                \"lookupValue\": \"={{ $today.format('dd/LL/yyyy') }}\"\n              },\n              {\n                \"lookupColumn\": \"Giờ\",\n                \"lookupValue\": \"=11:15\"\n              }\n            ]\n          },\n          \"options\": {}\n        },\n        \"type\": \"n8n-nodes-base.googleSheets\",\n        \"typeVersion\": 4.6,\n        \"position\": [\n          -200,\n          420\n        ],\n        \"id\": \"928b5007-91f4-44e8-97a8-157b14909839\",\n        \"name\": \"Google Sheets\",\n        \"credentials\": {\n          \"googleApi\": {\n            \"id\": \"Cmm4QrlNbI2eNQoo\",\n            \"name\": \"Google Sheets account 2\"\n          }\n        }\n      },\n      {\n        \"parameters\": {\n          \"jsCode\": \"// Lấy toàn bộ item từ node trước\\nconst items = $input.all();\\n\\n// Sắp xếp theo tên file (name), dạng tự nhiên (1.png < 2.png < 10.png)\\nitems.sort((a, b) => {\\n  const nameA = a.json.name.toLowerCase();\\n  const nameB = b.json.name.toLowerCase();\\n  return nameA.localeCompare(nameB, undefined, { numeric: true });\\n});\\n\\n// Trả từng item ra lại (vì n8n expects array of items)\\nreturn items;\\n\\n// Tạo một bản sao giống hệt của mảng items đã sắp xếp\\nconst itemsCopy = [...items];\\n\\n// Nối hai mảng lại với nhau để tạo thành một mảng duy nhất chứa tất cả các item (nhân đôi)\\nconst combinedItems = [...items, ...itemsCopy];\\n\\n// Trả về mảng đã nối\\n// return combinedItems;\"\n        },\n        \"type\": \"n8n-nodes-base.code\",\n        \"typeVersion\": 2,\n        \"position\": [\n          240,\n          420\n        ],\n        \"id\": \"21ebcc0f-105a-4645-a00a-e4aa299c19c9\",\n        \"name\": \"Code\",\n        \"executeOnce\": false\n      },\n      {\n        \"parameters\": {\n          \"options\": {}\n        },\n        \"type\": \"n8n-nodes-base.splitInBatches\",\n        \"typeVersion\": 3,\n        \"position\": [\n          40,\n          760\n        ],\n        \"id\": \"90291d76-86a9-48cc-a467-023a18ee56e7\",\n        \"name\": \"Loop Over Items\"\n      },\n      {\n        \"parameters\": {\n          \"rule\": {\n            \"interval\": [\n              {\n                \"field\": \"minutes\",\n                \"minutesInterval\": 1\n              }\n            ]\n          }\n        },\n        \"type\": \"n8n-nodes-base.scheduleTrigger\",\n        \"typeVersion\": 1.2,\n        \"position\": [\n          -420,\n          420\n        ],\n        \"id\": \"8b14aa28-3747-4fdf-82aa-d6f8a4d2185b\",\n        \"name\": \"Schedule Trigger\",\n        \"notesInFlow\": false\n      },\n      {\n        \"parameters\": {\n          \"assignments\": {\n            \"assignments\": [\n              {\n                \"id\": \"332d5c70-9459-4964-8ce1-4461eb754260\",\n                \"name\": \"media_fbid\",\n                \"value\": \"={{ $json.id }}\",\n                \"type\": \"string\"\n              }\n            ]\n          },\n          \"options\": {}\n        },\n        \"type\": \"n8n-nodes-base.set\",\n        \"typeVersion\": 3.4,\n        \"position\": [\n          680,\n          220\n        ],\n        \"id\": \"19432683-ef22-462f-92af-e7b49bee4ac0\",\n        \"name\": \"Edit Fields\"\n      },\n      {\n        \"parameters\": {\n          \"aggregate\": \"aggregateAllItemData\",\n          \"destinationFieldName\": \"attached_media\",\n          \"options\": {}\n        },\n        \"type\": \"n8n-nodes-base.aggregate\",\n        \"typeVersion\": 1,\n        \"position\": [\n          900,\n          220\n        ],\n        \"id\": \"6eb2a08e-e2e9-4c7a-a965-c232c8aabcdf\",\n        \"name\": \"Aggregate\"\n      },\n      {\n        \"parameters\": {\n          \"authentication\": \"serviceAccount\",\n          \"resource\": \"fileFolder\",\n          \"filter\": {\n            \"folderId\": {\n              \"__rl\": true,\n              \"value\": \"={{ $json['Hình ảnh'] }}\",\n              \"mode\": \"url\"\n            }\n          },\n          \"options\": {}\n        },\n        \"type\": \"n8n-nodes-base.googleDrive\",\n        \"typeVersion\": 3,\n        \"position\": [\n          20,\n          420\n        ],\n        \"id\": \"9342850b-8392-419a-9f42-80cd19d1cd26\",\n        \"name\": \"Load IMG\",\n        \"credentials\": {\n          \"googleApi\": {\n            \"id\": \"Cmm4QrlNbI2eNQoo\",\n            \"name\": \"Google Sheets account 2\"\n          }\n        }\n      },\n      {\n        \"parameters\": {\n          \"authentication\": \"serviceAccount\",\n          \"operation\": \"download\",\n          \"fileId\": {\n            \"__rl\": true,\n            \"value\": \"={{ $json.id }}\",\n            \"mode\": \"id\"\n          },\n          \"options\": {}\n        },\n        \"type\": \"n8n-nodes-base.googleDrive\",\n        \"typeVersion\": 3,\n        \"position\": [\n          200,\n          160\n        ],\n        \"id\": \"eb86b8b4-7e43-49f0-a1d1-553e34d2182c\",\n        \"name\": \"Download\",\n        \"credentials\": {\n          \"googleApi\": {\n            \"id\": \"Cmm4QrlNbI2eNQoo\",\n            \"name\": \"Google Sheets account 2\"\n          }\n        }\n      },\n      {\n        \"parameters\": {\n          \"httpRequestMethod\": \"POST\",\n          \"graphApiVersion\": \"v22.0\",\n          \"node\": \"=17841440218946263\",\n          \"edge\": \"media\",\n          \"options\": {\n            \"queryParameters\": {\n              \"parameter\": [\n                {\n                  \"name\": \"image_url\",\n                  \"value\": \"=https://drive.google.com/uc?export=download&id={{ $json.id }}\"\n                }\n              ]\n            }\n          }\n        },\n        \"id\": \"70337151-9a2b-4ca9-91c0-42e2d11f983c\",\n        \"name\": \"Create IG container1\",\n        \"type\": \"n8n-nodes-base.facebookGraphApi\",\n        \"typeVersion\": 1,\n        \"position\": [\n          480,\n          420\n        ],\n        \"credentials\": {\n          \"facebookGraphApi\": {\n            \"id\": \"e0fvyZHzpjxHCWHv\",\n            \"name\": \"Instagram_access_Hy-Hi\"\n          }\n        }\n      },\n      {\n        \"parameters\": {\n          \"httpRequestMethod\": \"POST\",\n          \"graphApiVersion\": \"v22.0\",\n          \"node\": \"={{ $('Set IG post').item.json.Node }}\",\n          \"edge\": \"media_publish\",\n          \"options\": {\n            \"queryParameters\": {\n              \"parameter\": [\n                {\n                  \"name\": \"creation_id\",\n                  \"value\": \"={{ $json.id }}\"\n                },\n                {\n                  \"name\": \"Image_url\",\n                  \"value\": \"={{ $('Set IG post').item.json['Image Url'] }}\"\n                },\n                {\n                  \"name\": \"caption\",\n                  \"value\": \"={{ $('Set IG post').item.json.Caption }}\"\n                }\n              ]\n            }\n          }\n        },\n        \"id\": \"c4286775-8981-4708-b6ad-f0dfdfc2f896\",\n        \"name\": \"Post to IG\",\n        \"type\": \"n8n-nodes-base.facebookGraphApi\",\n        \"typeVersion\": 1,\n        \"position\": [\n          1100,\n          220\n        ],\n        \"credentials\": {\n          \"facebookGraphApi\": {\n            \"id\": \"e0fvyZHzpjxHCWHv\",\n            \"name\": \"Instagram_access_Hy-Hi\"\n          }\n        }\n      },\n      {\n        \"parameters\": {\n          \"authentication\": \"serviceAccount\",\n          \"operation\": \"update\",\n          \"documentId\": {\n            \"__rl\": true,\n            \"value\": \"1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI\",\n            \"mode\": \"list\",\n            \"cachedResultName\": \"Tiệm thêu nhà Hy\",\n            \"cachedResultUrl\": \"https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk\"\n          },\n          \"sheetName\": {\n            \"__rl\": true,\n            \"value\": 1374572215,\n            \"mode\": \"list\",\n            \"cachedResultName\": \"Bài viết\",\n            \"cachedResultUrl\": \"https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1374572215\"\n          },\n          \"columns\": {\n            \"mappingMode\": \"defineBelow\",\n            \"value\": {\n              \"row_number\": \"={{ $('Google Sheets3').item.json.row_number }}\",\n              \"Trang Hy\": \"=https://www.facebook.com/{{ $json.id }}\"\n            },\n            \"matchingColumns\": [\n              \"row_number\"\n            ],\n            \"schema\": [\n              {\n                \"id\": \"Ngày\",\n                \"displayName\": \"Ngày\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true\n              },\n              {\n                \"id\": \"Giờ\",\n                \"displayName\": \"Giờ\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true\n              },\n              {\n                \"id\": \"Nội dung\",\n                \"displayName\": \"Nội dung\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true\n              },\n              {\n                \"id\": \"Hình ảnh\",\n                \"displayName\": \"Hình ảnh\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true\n              },\n              {\n                \"id\": \"Trang Hy\",\n                \"displayName\": \"Trang Hy\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true,\n                \"removed\": false\n              },\n              {\n                \"id\": \"Trang Hy-Hi\",\n                \"displayName\": \"Trang Hy-Hi\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true,\n                \"removed\": false\n              },\n              {\n                \"id\": \"Trạng thái\",\n                \"displayName\": \"Trạng thái\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true\n              },\n              {\n                \"id\": \"row_number\",\n                \"displayName\": \"row_number\",\n                \"required\": false,\n                \"defaultMatch\": false,\n                \"display\": true,\n                \"type\": \"string\",\n                \"canBeUsedToMatch\": true,\n                \"readOnly\": true,\n                \"removed\": false\n              }\n            ],\n            \"attemptToConvertTypes\": false,\n            \"convertFieldsToString\": false\n          },\n          \"options\": {}\n        },\n        \"type\": \"n8n-nodes-base.googleSheets\",\n        \"typeVersion\": 4.6,\n        \"position\": [\n          1280,\n          220\n        ],\n        \"id\": \"1ba04371-22b4-4056-9708-7ddfff1d7bc4\",\n        \"name\": \"Google Sheets2\",\n        \"credentials\": {\n          \"googleApi\": {\n            \"id\": \"Cmm4QrlNbI2eNQoo\",\n            \"name\": \"Google Sheets account 2\"\n          }\n        }\n      }\n    ],\n    \"connections\": {\n      \"Google Sheets\": {\n        \"main\": [\n          [\n            {\n              \"node\": \"Load IMG\",\n              \"type\": \"main\",\n              \"index\": 0\n            }\n          ]\n        ]\n      },\n      \"Code\": {\n        \"main\": [\n          [\n            {\n              \"node\": \"Create IG container1\",\n              \"type\": \"main\",\n              \"index\": 0\n            }\n          ]\n        ]\n      },\n      \"Loop Over Items\": {\n        \"main\": [\n          [],\n          []\n        ]\n      },\n      \"Schedule Trigger\": {\n        \"main\": [\n          [\n            {\n              \"node\": \"Google Sheets\",\n              \"type\": \"main\",\n              \"index\": 0\n            }\n          ]\n        ]\n      },\n      \"Edit Fields\": {\n        \"main\": [\n          [\n            {\n              \"node\": \"Aggregate\",\n              \"type\": \"main\",\n              \"index\": 0\n            }\n          ]\n        ]\n      },\n      \"Load IMG\": {\n        \"main\": [\n          [\n            {\n              \"node\": \"Code\",\n              \"type\": \"main\",\n              \"index\": 0\n            }\n          ]\n        ]\n      },\n      \"Download\": {\n        \"main\": [\n          []\n        ]\n      },\n      \"Create IG container1\": {\n        \"main\": [\n          []\n        ]\n      },\n      \"Aggregate\": {\n        \"main\": [\n          [\n            {\n              \"node\": \"Post to IG\",\n              \"type\": \"main\",\n              \"index\": 0\n            }\n          ]\n        ]\n      },\n      \"Post to IG\": {\n        \"main\": [\n          [\n            {\n              \"node\": \"Google Sheets2\",\n              \"type\": \"main\",\n              \"index\": 0\n            }\n          ]\n        ]\n      }\n    },\n    \"settings\": {\n      \"executionOrder\": \"v1\"\n    },\n    \"staticData\": null,\n    \"meta\": null,\n    \"pinData\": null,\n    \"versionId\": \"8b67517e-f1b6-4790-a36b-787642542559\",\n    \"triggerCount\": 0,\n    \"tags\": []\n  }\n]\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        280
+      ],
+      "id": "bc24213a-938f-4abc-b903-06ecb71041ad",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "workflowId": {
+          "__rl": true,
+          "value": "PzZDcFgNVcNhBvg4",
+          "mode": "list",
+          "cachedResultName": "Tiktok (#PzZDcFgNVcNhBvg4)"
+        },
+        "requestOptions": {}
+      },
+      "id": "b3abb417-8ec2-4267-b3ed-600705abe17e",
+      "name": "n8n - del WF",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        80,
+        0
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "21KT3H17dCqeNd8H",
+          "name": "n8n account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-08T03:02:35.000Z",
+  "versionId": "d4702f5b-a65d-4aa4-a1f9-4911c1b9a9e5"
+}
