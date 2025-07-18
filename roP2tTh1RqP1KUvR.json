@@ -1,0 +1,674 @@
+{
+  "active": false,
+  "connections": {
+    "Post to IG": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Set IG Parameter For Each",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Set IG Parameter For Once",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "API cloudinary get Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API cloudinary get Link": {
+      "main": [
+        [
+          {
+            "node": "Create IG children",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create IG children": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IG container CAROUSEL": {
+      "main": [
+        [
+          {
+            "node": "Post to IG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "IG container CAROUSEL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set IG Parameter For Each": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set IG Parameter For Once": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T14:58:18.140Z",
+  "id": "roP2tTh1RqP1KUvR",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "2.3 Post Images to IG",
+  "nodes": [
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "={{ $('Set IG Parameter For Once').item.json.Node }}",
+        "edge": "media_publish",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "creation_id",
+                "value": "={{ $json.id }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "10477506-f1a6-4fe2-a3c7-3bede9f23584",
+      "name": "Post to IG",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        288
+      ],
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "e0fvyZHzpjxHCWHv",
+          "name": "Instagram_access_Hy-Hi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "resource": "fileFolder",
+        "queryString": "=",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('Google Sheets').item.json['Hình ảnh'] }}",
+            "mode": "url"
+          }
+        },
+        "options": {
+          "fields": [
+            "*"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        944,
+        128
+      ],
+      "id": "6d4e7d9a-730e-4cb8-a041-54e36243b3f5",
+      "name": "Google Drive",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        288,
+        288
+      ],
+      "id": "15e0ea11-ff69-4d31-be0e-84347005f354",
+      "name": "Schedule Trigger",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI",
+          "mode": "list",
+          "cachedResultName": "Tiệm thêu nhà Hy",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1374572215,
+          "mode": "list",
+          "cachedResultName": "Bài viết",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1374572215"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Ngày",
+              "lookupValue": "={{ $today.format('dd/LL/yyyy') }}"
+            },
+            {
+              "lookupColumn": "Giờ",
+              "lookupValue": "={{ new Date().toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit' }) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        512,
+        272
+      ],
+      "id": "0c4d4d8c-b1bd-4dd4-bb58-0289f5b17721",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1168,
+        128
+      ],
+      "id": "54eb386d-9d28-44d7-b71b-e81fa2d1ddfd",
+      "name": "Download File",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cloudinary.com/v1_1/dw50nhs2a/image/upload",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "upload_preset",
+              "value": "Social"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1392,
+        128
+      ],
+      "id": "ce432b05-6e46-4146-ac9f-94afdc055443",
+      "name": "API cloudinary get Link"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "={{ $('Set IG Parameter For Each').item.json.Node }}",
+        "edge": "media",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "image_url",
+                "value": "={{ $json.secure_url }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "d0b49fb4-f6d6-4359-96dd-1b113d0db2c4",
+      "name": "Create IG children",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        128
+      ],
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "e0fvyZHzpjxHCWHv",
+          "name": "Instagram_access_Hy-Hi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "={{ $('Set IG Parameter For Once').item.json.Node }}",
+        "edge": "media",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "children",
+                "value": "={{ $json.media_ids.join(',') }}"
+              },
+              {
+                "name": "media_type",
+                "value": "CAROUSEL"
+              },
+              {
+                "name": "caption",
+                "value": "={{ $json.text }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "81bb7e62-3a73-4e24-8a56-8a723732dd53",
+      "name": "IG container CAROUSEL",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        2432,
+        288
+      ],
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "e0fvyZHzpjxHCWHv",
+          "name": "Instagram_access_Hy-Hi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lấy tất cả các item từ input\nconst allItems = $input.all();\nlet selectedItems;\n\n// Kiểm tra xem số lượng item có lớn hơn 20 không\nif (allItems.length > 10) {\n  // Nếu có, xáo trộn mảng và chỉ lấy 20 item đầu tiên\n  // [...allItems] tạo ra một bản sao để không làm thay đổi mảng gốc\n  // .sort() với hàm so sánh ngẫu nhiên là cách đơn giản để xáo trộn\n  const shuffled = [...allItems].sort(() => 0.5 - Math.random());\n  selectedItems = shuffled.slice(0, 10);\n} else {\n  // Nếu không, sử dụng tất cả các item\n  selectedItems = allItems;\n}\n\n// Từ các item đã chọn, lấy ra danh sách các id\nconst mediaIds = selectedItems.map(item => item.json.id);\n\n// Trả về kết quả theo đúng định dạng yêu cầu\nreturn [{\n  json: {\n    media_ids: mediaIds\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1904,
+        128
+      ],
+      "id": "7a8b4302-0b4d-4d60-971b-d0e946c27fd1",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2208,
+        288
+      ],
+      "id": "ba58b2eb-687f-4860-8d66-cad9c730fee0",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ae4a7b6e-bd21-4325-98c6-5a3c038d2e13",
+              "name": "Caption",
+              "value": "={{ $('Google Sheets').item.json['Nội dung'] }}",
+              "type": "string"
+            },
+            {
+              "id": "80dc7838-21da-48d9-bd18-2cead756e706",
+              "name": "Node",
+              "value": "17841440218946263",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5f045bb6-5b42-4095-a0da-053d814af7e2",
+      "name": "Set IG Parameter For Each",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ae4a7b6e-bd21-4325-98c6-5a3c038d2e13",
+              "name": "Caption",
+              "value": "={{ $('Google Sheets').item.json['Nội dung'] }}",
+              "type": "string"
+            },
+            {
+              "id": "80dc7838-21da-48d9-bd18-2cead756e706",
+              "name": "Node",
+              "value": "17841440218946263",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8a369358-b83f-49c7-b920-0ae94f363e5d",
+      "name": "Set IG Parameter For Once",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1600,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        640
+      ],
+      "id": "3eab8c83-9ac0-46d9-9288-8027058c15d2",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Ih6RKcterq0vM0bh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.Caption }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are an AI Content Specialist for the brand \"Tiệm thêu nhà Hy.\" Your primary mission is to take a user-provided article and skillfully condense it into a concise and charming Instagram post. CRITICAL INSTRUCTIONS: Word Count: The final output must be strictly under 150 words. Brevity is key. Source of Information: You MUST use only the information present in the input article provided by the user. DO NOT reference any external Google Sheets or invent details like price, promotions, or materials if they are not in the source text. Tone of Voice: The rewritten post must perfectly maintain the brand's signature tone: gentle, cheerful, warm, and delightful for both parents and children. REQUIRED STRUCTURE FOR THE SHORTENED POST: Icon + Hook (1 sentence): Start with a single, cute emoji (e.g., 🧸, 🦖, 🌱) and a captivating opening line from the original text that sparks immediate joy or curiosity. Product Highlights (1-2 sentences): Summarize the most appealing features and benefits. Focus on the feeling or the experience the product creates (e.g., \"watch your little one transform into a playful dinosaur\") rather than just listing technical specs. Call to Action (1 sentence): Craft a short, sweet, and persuasive invitation to purchase, making it sound like a wonderful gift for a child. Include the price or offer if it's mentioned in the source text. Hashtags: Conclude with the most relevant hashtags from the original post, ensuring the brand hashtag #tiemtheunhahy is included.  Hãy nhớ bài viết sau khi rút gọn là tiếng việt nhé"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        1824,
+        432
+      ],
+      "id": "ac7b469c-1aaa-4b10-a2af-b77dee268e6d",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI",
+          "mode": "list",
+          "cachedResultName": "Tiệm thêu nhà Hy",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 947271852,
+          "mode": "list",
+          "cachedResultName": "Tiktok-Ins",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=947271852"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Hy-IG": "Done"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Ngày",
+              "displayName": "Ngày",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Giờ",
+              "displayName": "Giờ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nội dung",
+              "displayName": "Nội dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video",
+              "displayName": "Video",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Post Type",
+              "displayName": "Post Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hy-IG",
+              "displayName": "Hy-IG",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2848,
+        288
+      ],
+      "id": "d145f977-9278-4c83-aba5-ba6e0fcb4d51",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-12T16:02:59.000Z",
+  "versionId": "97370cf1-97f0-4dca-9127-83c055eaeba9"
+}
