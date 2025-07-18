@@ -1,0 +1,905 @@
+{
+  "active": false,
+  "connections": {
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive2": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API3": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T14:55:44.034Z",
+  "id": "bQgR2azKY0PDP0Ob",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "2.1. auto-post_FB",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -220,
+        200
+      ],
+      "id": "1949b6d5-f699-46dd-9cb6-c7c6513e4f6d",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        0,
+        200
+      ],
+      "id": "2cd288c5-f995-477f-8523-09073e58b77f",
+      "name": "Google Drive2",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "581428248390217",
+        "edge": "photos",
+        "sendBinaryData": true,
+        "binaryPropertyName": "file:data",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "published",
+                "value": "false"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        220,
+        280
+      ],
+      "id": "f9ddb755-8834-40b8-afb1-d6f58cbfd0d8",
+      "name": "Facebook Graph API2",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "b0LAbVsRXsgdAeCJ",
+          "name": "Hy"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "332d5c70-9459-4964-8ce1-4461eb754260",
+              "name": "media_fbid",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "157124b7-2e15-4f43-94c6-f94a4d10d57c",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "attached_media",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "95c0cd0d-aad4-4afd-9077-cef5ae12df78",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "me",
+        "edge": "feed",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "={{ $('Google Sheets').item.json['Nội dung'] }}"
+              },
+              {
+                "name": "attached_media",
+                "value": "={{ $json.attached_media }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "40ed12bf-7a2e-4279-b008-ff3b19984225",
+      "name": "Facebook Graph API3",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "b0LAbVsRXsgdAeCJ",
+          "name": "Hy"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI",
+          "mode": "list",
+          "cachedResultName": "Tiệm thêu nhà Hy",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1374572215,
+          "mode": "list",
+          "cachedResultName": "Bài viết",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1374572215"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets').item.json.row_number }}",
+            "Trang Hy": "=https://www.facebook.com/{{ $json.id }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Ngày",
+              "displayName": "Ngày",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Giờ",
+              "displayName": "Giờ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nội dung",
+              "displayName": "Nội dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hình ảnh",
+              "displayName": "Hình ảnh",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Trang Hy",
+              "displayName": "Trang Hy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Trang Hy-Hi",
+              "displayName": "Trang Hy-Hi",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Trạng thái",
+              "displayName": "Trạng thái",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        660,
+        0
+      ],
+      "id": "dbbcef17-8e1f-4e1a-b5ae-754e7dbaa8e1",
+      "name": "Google Sheets2",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1100,
+        480
+      ],
+      "id": "3be1e458-1a0b-4ec4-a7d1-e96b6f9ba219",
+      "name": "Schedule Trigger1",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI",
+          "mode": "list",
+          "cachedResultName": "Tiệm thêu nhà Hy",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1374572215,
+          "mode": "list",
+          "cachedResultName": "Bài viết",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1374572215"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Ngày",
+              "lookupValue": "={{ $today.format('dd/LL/yyyy') }}"
+            },
+            {
+              "lookupColumn": "Giờ",
+              "lookupValue": "={{ new Date().toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit' }) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -880,
+        480
+      ],
+      "id": "077cbaec-bb28-408b-9274-b0e1c6a20ecf",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json['Hình ảnh'] }}",
+            "mode": "url"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -660,
+        480
+      ],
+      "id": "248cc12b-dc91-45b8-a865-b9d543c24d16",
+      "name": "Google Drive",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lấy toàn bộ item từ node trước\nconst items = $input.all();\n\n// Sắp xếp theo tên file (name), dạng tự nhiên (1.png < 2.png < 10.png)\nitems.sort((a, b) => {\n  const nameA = a.json.name.toLowerCase();\n  const nameB = b.json.name.toLowerCase();\n  return nameA.localeCompare(nameB, undefined, { numeric: true });\n});\n\n// Trả từng item ra lại (vì n8n expects array of items)\nreturn items;\n\n// Tạo một bản sao giống hệt của mảng items đã sắp xếp\nconst itemsCopy = [...items];\n\n// Nối hai mảng lại với nhau để tạo thành một mảng duy nhất chứa tất cả các item (nhân đôi)\nconst combinedItems = [...items, ...itemsCopy];\n\n// Trả về mảng đã nối\n// return combinedItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        480
+      ],
+      "id": "dc4d86cf-7ac2-4085-b3e5-1bebed468457",
+      "name": "Code",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -220,
+        740
+      ],
+      "id": "dae950cf-947f-46df-8852-6aa069cee6d6",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        0,
+        740
+      ],
+      "id": "fc415ee2-a49a-4dd1-9d5c-4f3dbe4ca839",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "715058798347416",
+        "edge": "photos",
+        "sendBinaryData": true,
+        "binaryPropertyName": "file:data",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "published",
+                "value": "false"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        220,
+        800
+      ],
+      "id": "a8e06916-08c2-4ca8-ae81-c4aefb46a5ce",
+      "name": "Facebook Graph API",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "f5aZfKog8YjW9Nix",
+          "name": "Hy-Hi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "332d5c70-9459-4964-8ce1-4461eb754260",
+              "name": "media_fbid",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        540
+      ],
+      "id": "12d35e2e-48b3-4c77-984a-d860fe191c56",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "attached_media",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        220,
+        540
+      ],
+      "id": "ae84b6be-2a6f-4b39-b14b-cc280db91a03",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "me",
+        "edge": "feed",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "={{ $('Google Sheets').item.json['Nội dung'] }}"
+              },
+              {
+                "name": "attached_media",
+                "value": "={{ $json.attached_media }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        440,
+        540
+      ],
+      "id": "956d7d67-b706-4a60-94a0-f73b14ddf697",
+      "name": "Facebook Graph API1",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "f5aZfKog8YjW9Nix",
+          "name": "Hy-Hi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI",
+          "mode": "list",
+          "cachedResultName": "Tiệm thêu nhà Hy",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1374572215,
+          "mode": "list",
+          "cachedResultName": "Bài viết",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1374572215"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets').item.json.row_number }}",
+            "Trang Hy-Hi": "=https://www.facebook.com/{{ $json.id }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Ngày",
+              "displayName": "Ngày",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Giờ",
+              "displayName": "Giờ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nội dung",
+              "displayName": "Nội dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hình ảnh",
+              "displayName": "Hình ảnh",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Trang Hy",
+              "displayName": "Trang Hy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Trang Hy-Hi",
+              "displayName": "Trang Hy-Hi",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Trạng thái",
+              "displayName": "Trạng thái",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        660,
+        540
+      ],
+      "id": "e0b1ae2f-9fd0-4f6e-ac58-0e096687602a",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## FP Hy\n",
+        "height": 560,
+        "width": 1320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        -80
+      ],
+      "id": "8fae45f9-39e6-45b8-8e8a-d2ffb6b69b78",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## FP Hy - hi",
+        "height": 540,
+        "width": 1300
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        500
+      ],
+      "id": "0d55e3e7-52d0-4ff2-ae2b-5ce34a0cd5d0",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger1": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-08T14:30:01.000Z",
+  "versionId": "4b80a40d-119c-4552-b019-3db15bae8202"
+}
