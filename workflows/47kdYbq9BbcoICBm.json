@@ -1,0 +1,530 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T15:05:15.558Z",
+  "id": "47kdYbq9BbcoICBm",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "3.1. Rep-Mes-Hy",
+  "nodes": [
+    {
+      "parameters": {
+        "multipleMethods": true,
+        "path": "351f169f-02c6-4a2b-a1d6-e31ce99ea086",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -288,
+        368
+      ],
+      "id": "3715bd6c-61f3-4ca6-bd12-bd276fddd19e",
+      "name": "Webhook",
+      "webhookId": "351f169f-02c6-4a2b-a1d6-e31ce99ea086"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.3,
+      "position": [
+        32,
+        240
+      ],
+      "id": "dd36240b-0323-472b-8dfe-9f5d59becf31",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cecce30a-54ed-43ef-8711-9655d7e001e3",
+              "leftValue": "={{ $json.body.entry[0].messaging[0].message.text }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        128,
+        480
+      ],
+      "id": "38e46f6f-b5a6-41b1-b6a5-f92cd56bf3ce",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cbf17a7-7c1c-47eb-95b3-4b60b94b08ec",
+              "name": "id Khách Hàng",
+              "value": "={{ $json.body.entry[0].messaging[0].sender.id }}",
+              "type": "string"
+            },
+            {
+              "id": "8d22426a-7eb9-4ae0-8a26-617c3c84b710",
+              "name": "id Page",
+              "value": "={{ $json.body.entry[0].messaging[0].recipient.id }}",
+              "type": "string"
+            },
+            {
+              "id": "d4e96a43-a877-448a-980d-d56c22bc2853",
+              "name": "Tin nhắn",
+              "value": "={{ $json.body.entry[0].messaging[0].message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        320
+      ],
+      "id": "c0088b3d-0033-4486-92e3-18d38bee8a8c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst body = {\n  \"recipient\":{\n    \"id\":`${$('Edit Fields').first().json['id Khách Hàng']}`\n  },\n  \"message\":{\n    \"text\":`${$input.first().json.output}`\n  }\n}\nreturn {\n  data: body\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        320
+      ],
+      "id": "666b22fb-63f1-4f6d-801c-fa8862a2be08",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v23.0/581428248390217/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAATfZAqjshiYBO1qJyLDGZCL8VIH4eRiiF4AEJzxKoSWgzGa2tluJQOpZAIMOZAN2JF8BAnJlZCo7BGx9ryZCXFeqsSs8N12wmWM0UnvHZAZBMjcUlYQ5TaNRp9Uhqzre7orsMfQHTdvRscflNMBj0xySxL3JETZAGPP1CI2gvpuHDhLr0ul3zvlca8PZBDRXLuVeBY7j2FL95ZCN2WoIOX7GHXGSZC5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1344,
+        320
+      ],
+      "id": "2613849c-da61-49ae-95eb-44878d0d539d",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst body = {\n  \"recipient\":{\n    \"id\":`${$('Webhook').first().json.body.entry[0].messaging[0].sender.id}`\n  },\n  \"message\":{\n    \"text\":\"Tôi là Ai chatbot, mong anh/chị hãy hỏi về các sản phẩm của shop nhé!\"\n  }\n}\nreturn {\n  data: body\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        352,
+        624
+      ],
+      "id": "ecfb5c4b-a02e-4cb0-a533-e0344665f3ad",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v23.0/581428248390217/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAATfZAqjshiYBO1qJyLDGZCL8VIH4eRiiF4AEJzxKoSWgzGa2tluJQOpZAIMOZAN2JF8BAnJlZCo7BGx9ryZCXFeqsSs8N12wmWM0UnvHZAZBMjcUlYQ5TaNRp9Uhqzre7orsMfQHTdvRscflNMBj0xySxL3JETZAGPP1CI2gvpuHDhLr0ul3zvlca8PZBDRXLuVeBY7j2FL95ZCN2WoIOX7GHXGSZC5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        752,
+        624
+      ],
+      "id": "7f096389-700e-45b2-ab98-b7cfaca09ec8",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json['Tin nhắn'] }}",
+        "options": {
+          "systemMessage": "You are a dedicated and professional product consultant specializing in custom-made backpacks, hats, keychains, and embroidered patches, catering to parents and guardians looking for unique, personalized items for children (embroidering names, phone numbers, etc.).\n\nYour mission is to help customers choose suitable products, answer all their questions, and gently encourage purchasing.\n\nQuestion Processing Flow:\n\nCheck Frequently Asked Questions (FAQ):\n\nFirst, search for answers in the 'Trả lời khách' Google Sheet.\nIf a suitable answer is found (exact or similar), use that information to respond. You may combine multiple answers for a more comprehensive and friendly reply.\nRetrieve Product Information:\n\nIf the question relates to specific products (product name, price, promotions, specifications, features, product recommendations...) look up information in the 'Sản phẩm' Google Sheet.\nBased on the retrieved data, advise as a professional salesperson: introduce the product, highlight key advantages, current promotions, and gently encourage the customer to make a suitable purchase decision.\nHandle Special Cases:\n\nIf no data is found in either Google Sheet but the question is still related to the shop's products, you may synthesize information or use general knowledge (if the system allows).\nIf the question is completely unrelated to the shop's products (backpacks, hats, keychains, embroidered patches), please politely reply: \"I'm not familiar with that topic. Please ask about products like backpacks, hats, keychains, or embroidered patches!\"\nCommunication Style:\n\nFriendly, natural, and approachable tone, as if speaking in person (\"Yes, certainly!\", \"Please take a look at this, sir/madam.\", \"This product is very popular right now!\").\nAvoid bullet points or table-like listings. Speak clearly and fluently.\nGently encourage purchasing (\"You might consider this product as it's currently on a great discount!\").\nIf information about the shopping cart, stock availability, or nearest store is available, include it in your advice (\"This item is in stock, would you like to place an order now?\").\"\n\nStrictly adhere to the following rules:\n\nDO NOT hallucinate or fabricate ANY information.\nIf a piece of information (e.g., promotional offers, material composition, specific dimensions like size or weight, technical specifications) is NOT explicitly present in the Google Sheet, state that the information is unavailable or not provided.\nPresent the information clearly and concisely.\nAfter generating the product information, conclude your message with the following exact phrase with font Bold: '#Tôi_Là_ChatbotAI_Của_TiemtheunhaHy'.\"\n\nImportant note: Always respond to customers in Vietnamese."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        672,
+        224
+      ],
+      "id": "92d33ee6-e5f1-4aa3-acf5-6c53d68ed60c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        496,
+        448
+      ],
+      "id": "c6d59146-116a-4256-a68c-65c6e6f7e31b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Ih6RKcterq0vM0bh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json['id Khách Hàng'] }}",
+        "contextWindowLength": 100
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        736,
+        448
+      ],
+      "id": "74449b8d-9bb8-4e84-abdb-05c9925b6061",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "9d838ghov9eLIVFC",
+          "name": "PSQL-Rep-Mess"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI",
+          "mode": "list",
+          "cachedResultName": "Tiệm thêu nhà Hy",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1492494122,
+          "mode": "list",
+          "cachedResultName": "Sản phẩm",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1492494122"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        832,
+        448
+      ],
+      "id": "c2b33b20-28a4-4190-b133-39a6e9147488",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2ac77cb5-c0f1-4731-8518-fba2bca1f7f8",
+              "leftValue": "={{Number((new Date().getTime() - $json.body.entry[0].messaging[0].timestamp) / 1000 )}}\n",
+              "rightValue": "={{ Number(120) }}",
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        528
+      ],
+      "id": "65250ca6-b04b-4576-b8a2-1265fd0d0a58",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI",
+          "mode": "list",
+          "cachedResultName": "Tiệm thêu nhà Hy",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1471922413,
+          "mode": "list",
+          "cachedResultName": "Trả lời khách",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-F5otzEVulA27zpsvbuogYH22saknum_FmYQikeJKoI/edit#gid=1471922413"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        960,
+        448
+      ],
+      "id": "a0e2fb57-994f-4ff2-84b1-333fb3dd4dd2",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleApi": {
+          "id": "Cmm4QrlNbI2eNQoo",
+          "name": "Google Sheets Love"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-3.5-turbo-0613",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        624,
+        448
+      ],
+      "id": "e8771f2d-915a-4d0e-b6af-a415be837d16",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "nERLzlU7ksulhMd2",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-09T23:41:59.000Z",
+  "versionId": "5f128ab6-6fef-4a82-b999-a6f8d02c37ec"
+}
