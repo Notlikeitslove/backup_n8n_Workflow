@@ -1,0 +1,797 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Get all files in given path",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all files in given path": {
+      "main": [
+        [
+          {
+            "node": "Split the result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split the result": {
+      "main": [
+        [
+          {
+            "node": "Get file content from GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get file content from GitHub": {
+      "main": [
+        [
+          {
+            "node": "Convert files to JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert files to JSON": {
+      "main": [
+        [
+          {
+            "node": "Check for skipped Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for skipped Credentials": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Restore n8n Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If workflow already exists": {
+      "main": [
+        [
+          {
+            "node": "n8n - create workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set n8n existing workflows names": {
+      "main": [
+        [
+          {
+            "node": "Merge Github and n8n workflows - Keep only non existing workflows based on the name",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "GitHub - get all files": {
+      "main": [
+        [
+          {
+            "node": "Merge globals and files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "n8n - get all workflows": {
+      "main": [
+        [
+          {
+            "node": "Set n8n existing workflows names",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub - get each file": {
+      "main": [
+        [
+          {
+            "node": "Set name and content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set name and content": {
+      "main": [
+        [
+          {
+            "node": "Merge Github and n8n workflows - Keep only non existing workflows based on the name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge globals and files": {
+      "main": [
+        [
+          {
+            "node": "GitHub - get each file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Github and n8n workflows - Keep only non existing workflows based on the name": {
+      "main": [
+        [
+          {
+            "node": "If workflow already exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals1": {
+      "main": [
+        [
+          {
+            "node": "GitHub - get all files",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge globals and files",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Globals1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "n8n - get all workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T14:52:11.465Z",
+  "id": "Z8yIHoLJBy3Jg9Z4",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "9. Restore",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4049dde5-96ba-489f-ab16-f910b2c921a9",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        2000,
+        400
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6cf546c5-5737-4dbd-851b-17d68e0a3780",
+              "name": "repo.owner",
+              "type": "string",
+              "value": "Notlikeitslove"
+            },
+            {
+              "id": "452efa28-2dc6-4ea3-a7a2-c35d100d0382",
+              "name": "repo.name",
+              "type": "string",
+              "value": "backup_n8n_trhquan"
+            },
+            {
+              "id": "81c4dc54-86bf-4432-a23f-22c7ea831e74",
+              "name": "repo.path",
+              "type": "string",
+              "value": "credentials"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "16d7e92d-b759-4adc-9723-ae81fbd9b344",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2240,
+        400
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "content": "## Edit this node 👇\nrepo.owner = id github count\nrepo.name = github repo name",
+        "height": 100,
+        "width": 270,
+        "color": 4
+      },
+      "id": "4c308698-e01e-447e-ae32-122e9afae295",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2060,
+        280
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/{{ $json.repo.owner }}/{{ $json.repo.name }}/contents/{{ $json.repo.path }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "options": {}
+      },
+      "id": "b36bc3f1-a3b9-40d5-a538-058d61a7d7bc",
+      "name": "Get all files in given path",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2460,
+        400
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "githubApi": {
+          "id": "ClAH6l7tFYbwp60U",
+          "name": "GitHub Notlikeitslove"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "path",
+        "options": {}
+      },
+      "id": "ad477703-0afb-430c-b7c5-35d5b556fa2b",
+      "name": "Split the result",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        2000,
+        620
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "={{ $('Globals').item.json.repo.owner }}",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{ $('Globals').item.json.repo.name }}",
+          "mode": "name"
+        },
+        "filePath": "={{ $('Get all files in given path').item.json.path }}",
+        "additionalParameters": {}
+      },
+      "id": "64ae2d23-8a22-40b6-b82a-1977f175b728",
+      "name": "Get file content from GitHub",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        2240,
+        620
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "webhookId": "5728564b-f59a-490c-b6f1-7f4be50f0e12",
+      "credentials": {
+        "githubApi": {
+          "id": "ClAH6l7tFYbwp60U",
+          "name": "GitHub Notlikeitslove"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "id": "bda2bc18-a0cd-4bc8-905a-6512a283519c",
+      "name": "Convert files to JSON",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        2460,
+        620
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "credential",
+        "name": "={{ $json.data.name }}",
+        "credentialTypeName": "={{ $json.data.type }}",
+        "data": "={{ JSON.stringify($json.data.data) }}",
+        "requestOptions": {}
+      },
+      "id": "3a9e70b1-1b4a-45d3-9368-958666ffdd20",
+      "name": "Restore n8n Credentials",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        2280,
+        900
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "21KT3H17dCqeNd8H",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "ad031296-4ac0-4087-bc35-7975a2cc25e6",
+              "operator": {
+                "type": "object",
+                "operation": "empty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.data }}",
+              "rightValue": ""
+            },
+            {
+              "id": "ca912a57-6a4b-4b9a-be0e-37b69d3e4917",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "leftValue": "={{ $json.data.name }}",
+              "rightValue": "n8n account"
+            },
+            {
+              "id": "f7c08cc3-e796-4451-8b63-cf8fa8a7b530",
+              "leftValue": "={{ $json.data.name }}",
+              "rightValue": "GitHub account",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "315303a0-61db-4190-be92-df89b7c22b3b",
+      "name": "Check for skipped Credentials",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        2000,
+        880
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "content": "https://www.youtube.com/channel/UCIhrU-hkXylBKX8MRaN_2iA/\nBase on bangank36's & agentstudio's work",
+        "height": 80,
+        "width": 320,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2400,
+        1080
+      ],
+      "id": "66dbdf25-a2bb-4f41-96c0-c4934ea47b0c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# KHÔI PHỤC CREDENTIALS TỪ GITHUB",
+        "height": 80,
+        "width": 680
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        100
+      ],
+      "id": "9f1e76fc-d35a-4569-8c2e-186392007ecb",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "063d51c7-0b7a-48a4-82b3-76b370fc4265",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              },
+              "leftValue": "={{ $('Merge Github and n8n workflows - Keep only non existing workflows based on the name').item.json.name }}",
+              "rightValue": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "16e70895-f6b8-4cc6-a6a5-7388a669ec91",
+      "name": "If workflow already exists",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1280,
+        440
+      ],
+      "typeVersion": 2,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6be8c184-8fb7-47a9-ad42-d0dc3db1eea4",
+              "name": "name",
+              "type": "string",
+              "value": "={{ $json.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4231d5c5-bbd4-41ea-bfac-face2a49689c",
+      "name": "Set n8n existing workflows names",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        740,
+        560
+      ],
+      "typeVersion": 3.3,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\"Globals1\"].json[\"repo\"][\"owner\"]}}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\"Globals1\"].json[\"repo\"][\"name\"]}}"
+        },
+        "filePath": "={{$node[\"Globals1\"].json[\"repo\"][\"path\"]}}"
+      },
+      "id": "2d399c74-273f-4b9a-8520-3234dffe3537",
+      "name": "GitHub - get all files",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        140,
+        220
+      ],
+      "typeVersion": 1,
+      "webhookId": "58e87881-1bd0-41ee-a4c3-9cd684981342",
+      "credentials": {
+        "githubApi": {
+          "id": "ClAH6l7tFYbwp60U",
+          "name": "GitHub Notlikeitslove"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "id": "126c96b7-2a9a-42cd-9fd3-6a278094a62d",
+      "name": "n8n - get all workflows",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        -80,
+        560
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "21KT3H17dCqeNd8H",
+          "name": "n8n account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $json.repo.owner }}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $json.repo.name }}"
+        },
+        "filePath": "={{ $json.path }}",
+        "asBinaryProperty": false,
+        "additionalParameters": {}
+      },
+      "id": "fb119c2b-22e4-4358-b9e7-4b8ad598f851",
+      "name": "GitHub - get each file",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        560,
+        340
+      ],
+      "typeVersion": 1,
+      "webhookId": "2263f591-2168-4ca3-b0e6-1cc1204ebb2e",
+      "credentials": {
+        "githubApi": {
+          "id": "ClAH6l7tFYbwp60U",
+          "name": "GitHub Notlikeitslove"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "714b0cfd-9f06-4e2f-b73d-30ef39dc40e3",
+              "name": "content",
+              "type": "string",
+              "value": "={{ $json.content.base64Decode() }}"
+            },
+            {
+              "id": "6f48ed58-d55a-4ee4-8cf2-373941aaa341",
+              "name": "name",
+              "type": "string",
+              "value": "={{ $json.name.replace(\".json\", \"\") }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b73ee488-32a0-4229-b5b2-630182a9ad81",
+      "name": "Set name and content",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        760,
+        340
+      ],
+      "typeVersion": 3.3,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "workflowObject": "={{ $('Set name and content').item.json.content }}",
+        "requestOptions": {}
+      },
+      "id": "85b47bde-c3c1-4208-961c-243e48c40571",
+      "name": "n8n - create workflow",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        1600,
+        420
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "21KT3H17dCqeNd8H",
+          "name": "n8n account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "66dc0e8e-8884-4c79-885c-80230bb9bcd3",
+      "name": "Merge globals and files",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        360,
+        340
+      ],
+      "typeVersion": 2.1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "name",
+              "field2": "name"
+            }
+          ]
+        },
+        "joinMode": "keepNonMatches",
+        "outputDataFrom": "input1",
+        "options": {}
+      },
+      "id": "2d8d247a-1697-4672-8e3d-42ced147a305",
+      "name": "Merge Github and n8n workflows - Keep only non existing workflows based on the name",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        1060,
+        440
+      ],
+      "typeVersion": 2.1,
+      "alwaysOutputData": true,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "repo.owner",
+              "value": "Notlikeitslove"
+            },
+            {
+              "name": "repo.name",
+              "value": "backup_n8n_trhquan"
+            },
+            {
+              "name": "repo.path",
+              "value": "workflows"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "02aee5a5-d7ac-4e6d-be2f-c15e4fb0ff8e",
+      "name": "Globals1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -80,
+        360
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -460,
+        460
+      ],
+      "id": "56753e63-23f5-4602-b672-7687f70a9cfa",
+      "name": "Schedule Trigger",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# KHÔI PHỤC WORKFLOW TỪ GITHUB",
+        "height": 80,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        140,
+        100
+      ],
+      "id": "4280e0cd-aa65-40ac-9364-7784fb6af08a",
+      "name": "Sticky Note2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Edit this node 👇\nrepo.owner = id github count\nrepo.name = github repo name",
+        "height": 100,
+        "width": 310,
+        "color": 4
+      },
+      "id": "fb113ca9-0842-49e6-a6a9-97e8c69178a2",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -260,
+        240
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-06T14:52:50.000Z",
+  "versionId": "a253001f-007e-4116-ac1e-dde8688e1dd6"
+}
